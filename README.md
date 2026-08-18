@@ -1,4 +1,4 @@
-# 💼 AI-Powered Job Board & Recruitment Platform
+# AI-Powered Job Board & Recruitment Platform
 
 [![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
@@ -10,26 +10,26 @@ A modern, full-stack web application designed to bridge the gap between job seek
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 👤 Candidate Experience
+### Candidate Experience
 * **Profile Management:** Candidates can upload resumes, manage skills, update profile pictures, and maintain employment descriptions.
 * **Job Discovery:** Browse listed opportunities filtering by salary, work type (*Remote, On-site, Hybrid*), and category.
 * **1-Click Application:** Apply for jobs seamlessly with automatic prevention of duplicate applications.
 * **Application Tracking:** Track application status (*Applied, Cancelled*) with real-time status updates.
 
-### 🛡️ Admin Management
+### Admin Management
 * **Job Posting & Lifecycle Control:** Full CRUD functionality to list, update, and manage open positions.
 * **Applicant Oversight:** Review submitted candidate profiles, phone numbers, resumes, and matched skill sets.
 * **Candidate Pool Directory:** Dedicated admin directory to analyze top talent in the platform.
 
-### 🤖 AI Assistant Chatbot
+### AI Assistant Chatbot
 * Context-aware query processing for candidates seeking tailored job recommendations.
 * Operational assistance for administrators managing candidate data and job postings.
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack & Architecture
 
 | Layer | Technology |
 | :--- | :--- |
@@ -41,7 +41,7 @@ A modern, full-stack web application designed to bridge the gap between job seek
 
 ---
 
-## 📂 Database Schema Overview
+## Database Schema Overview
 
 The core system architecture consists of three central entities with relational integrity:
 
@@ -51,7 +51,7 @@ The core system architecture consists of three central entities with relational 
 
 ---
 
-## 🚀 Quickstart Installation Guide
+## Quickstart Installation Guide
 
 Follow these steps to get the project running locally.
 
