@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <!-- Job Details List (Stacked Vertically) -->
+    <!-- Job Details List -->
     <div class="space-y-4 p-5 bg-slate-900/60 border border-slate-800 rounded-xl mb-6 text-xs">
         <div class="pb-3 border-b border-slate-800/80">
             <span class="text-slate-500 block text-[11px] font-semibold uppercase tracking-wider mb-1">Category</span>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <!-- Description (Supports Newlines and Bullet Points) -->
+    <!-- Description -->
     <div class="space-y-2 mb-8">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Job Description</h3>
         <div class="text-xs text-slate-300 bg-slate-900/40 p-5 rounded-xl border border-slate-800/80 leading-relaxed whitespace-pre-line font-normal">
@@ -69,10 +69,13 @@
     <div class="pt-4 border-t border-slate-800">
         @if(auth()->check() && method_exists(auth()->user(), 'isCandidate') && auth()->user()->isCandidate())
             @php
-                $hasApplied = auth()->user()->applications()->where('job_id', $job->id)->exists();
+                $hasActiveApplication = auth()->user()->applications()
+                    ->where('job_id', $job->id)
+                    ->where('status', 'applied')
+                    ->exists();
             @endphp
 
-            @if($hasApplied)
+            @if($hasActiveApplication)
                 <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800">
                     <span class="text-xs text-emerald-400 font-semibold">Application Submitted</span>
                     <form action="{{ route('applications.destroy', $job) }}" method="POST">

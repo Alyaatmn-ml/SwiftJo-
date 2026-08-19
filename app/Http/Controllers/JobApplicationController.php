@@ -29,7 +29,7 @@ class JobApplicationController extends Controller
         if ($existing) {
             if ($existing->status === 'cancelled') {
                 $existing->update(['status' => 'applied']);
-                return back()->with('success', 'Application reactivated successfully.');
+                return back()->with('success', 'Application submitted successfully.');
             }
             return back()->with('error', 'You have already applied for this job.');
         }
@@ -80,7 +80,11 @@ class JobApplicationController extends Controller
             abort(403, 'Admin access required.');
         }
 
-        $applications = JobApplication::with(['job', 'user'])->latest()->get();
+        // Only retrieve applications that are currently active (status = 'applied')
+        $applications = JobApplication::with(['job', 'user'])
+            ->where('status', 'applied')
+            ->latest()
+            ->get();
 
         return view('admin.applications', compact('applications'));
     }
