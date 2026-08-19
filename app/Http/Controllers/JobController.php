@@ -34,9 +34,7 @@ class JobController extends Controller
 
         $jobs = $query->latest()->paginate(6)->appends($request->query());
 
-        // Enhanced AI Recommendation Engine (Matches: Skills + Job Title + Profile Description)
         $recommendedJobs = collect();
-        /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
         if ($user && method_exists($user, 'isCandidate') && $user->isCandidate()) {
@@ -51,21 +49,18 @@ class JobController extends Controller
                     $jobDesc   = strtolower($job->description ?? '');
                     $jobCat    = strtolower($job->category ?? '');
 
-                    // 1. Skill Match against job required skills or job title
                     foreach ($userSkills as $skill) {
                         if ($skill !== '' && (str_contains($jobSkills, $skill) || str_contains($jobTitle, $skill))) {
                             return true;
                         }
                     }
 
-                    // 2. Job Title Keywords Match against job title or category
                     foreach ($userTitleKeywords as $kw) {
                         if (strlen($kw) > 2 && (str_contains($jobTitle, $kw) || str_contains($jobCat, $kw))) {
                             return true;
                         }
                     }
 
-                    // 3. Profile Bio Keywords Match against job title or skills
                     foreach ($userBioKeywords as $kw) {
                         if (strlen($kw) > 3 && (str_contains($jobTitle, $kw) || str_contains($jobSkills, $kw))) {
                             return true;
