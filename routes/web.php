@@ -12,7 +12,6 @@ Route::get('/', function () {
     return redirect()->route('jobs.index');
 });
 
-// Authentication Routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -22,27 +21,18 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Jobs Public Routes
 Route::resource('jobs', JobController::class);
 
-// Authenticated Routes
 Route::middleware('auth')->group(function () {
-    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // Applications
     Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('applications.store');
     Route::delete('/jobs/{job}/apply', [JobApplicationController::class, 'destroy'])->name('applications.destroy');
     
-    // Backward compatibility route aliases
-    Route::post('/jobs/{job}/apply-legacy', [JobApplicationController::class, 'store'])->name('jobs.apply');
-    Route::patch('/applications/{application}/cancel', [JobApplicationController::class, 'cancel'])->name('applications.cancel');
 
-    // AI Chatbot
     Route::post('/chatbot', [ChatbotController::class, 'respond'])->name('chatbot.respond');
 
-    // Admin Specific Routes
     Route::middleware(AdminMiddleware::class)->group(function () {
         Route::get('/admin/candidates', [JobController::class, 'adminCandidates'])->name('admin.candidates');
         Route::get('/admin/applications', [JobApplicationController::class, 'index'])->name('admin.applications');

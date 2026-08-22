@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Create System Admin
         $admin = User::create([
             'name' => 'System Admin',
             'email' => 'admin@example.com',
@@ -20,7 +19,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // 2. Create Candidates with skills
         $candidate1 = User::create([
             'name' => 'Salma Developer',
             'email' => 'salma@gmail.com',
@@ -45,7 +43,6 @@ class DatabaseSeeder extends Seeder
             'profile_description' => 'Specialized in predictive modeling and analytics.',
         ]);
 
-        // 3. Create Job Openings
         $job1 = Job::create([
             'title' => 'Senior Laravel Engineer',
             'description' => 'We are seeking an experienced Laravel engineer to lead our backend architecture, optimize database queries, and manage API integrations.',
@@ -90,7 +87,6 @@ class DatabaseSeeder extends Seeder
             'deadline' => now()->addDays(15),
         ]);
 
-        // 4. Create Job Applications
         JobApplication::create([
             'job_id' => $job1->id,
             'user_id' => $candidate1->id,

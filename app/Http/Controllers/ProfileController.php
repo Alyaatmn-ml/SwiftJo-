@@ -29,7 +29,6 @@ class ProfileController extends Controller
             'resume'              => 'nullable|file|mimes:pdf,doc,docx|max:10240',
         ]);
 
-        // Handle Profile Image Upload
         if ($request->hasFile('profile_image')) {
             if ($user->profile_image) {
                 Storage::disk('public')->delete($user->profile_image);
@@ -37,7 +36,6 @@ class ProfileController extends Controller
             $validated['profile_image'] = $request->file('profile_image')->store('profile_images', 'public');
         }
 
-        // Handle Resume / CV Upload
         if ($request->hasFile('resume')) {
             if ($user->resume) {
                 Storage::disk('public')->delete($user->resume);

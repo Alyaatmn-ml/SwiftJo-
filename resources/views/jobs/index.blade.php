@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Bonus Feature: AI Job Recommendations -->
 @if(auth()->check() && auth()->user()->isCandidate() && $recommendedJobs->count() > 0)
     <div class="mb-8 p-6 bg-gradient-to-r from-indigo-950/60 to-slate-950 border border-indigo-800/40 rounded-2xl">
         <h2 class="text-lg font-bold text-indigo-400 mb-1">Recommended Jobs For You</h2>

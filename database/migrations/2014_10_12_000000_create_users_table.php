@@ -15,7 +15,6 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'candidate'])->default('candidate');
             
-            // Candidate Profile Fields
             $table->integer('age')->nullable();
             $table->string('job_title')->nullable();
             $table->text('profile_description')->nullable();

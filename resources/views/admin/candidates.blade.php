@@ -20,10 +20,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach($candidates as $candidate)
                 <div class="bg-slate-950 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between space-y-4">
-                    <!-- Profile Header -->
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-center gap-4">
-                            <!-- Avatar / Image -->
                             <div class="flex-shrink-0">
                                 @if($candidate->profile_image)
                                     <img src="{{ asset('storage/' . $candidate->profile_image) }}" alt="{{ $candidate->name }}" class="w-14 h-14 rounded-full object-cover border-2 border-indigo-500 shadow-md">
@@ -48,14 +46,12 @@
                         @endif
                     </div>
 
-                    <!-- Profile Description -->
                     @if($candidate->profile_description)
                         <p class="text-xs text-slate-300 bg-slate-900/60 p-3 rounded-xl border border-slate-800/80 leading-relaxed">
                             {{ $candidate->profile_description }}
                         </p>
                     @endif
 
-                    <!-- Candidate Skills -->
                     <div>
                         <span class="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5 font-bold">Skills</span>
                         @if($candidate->skills)
@@ -71,7 +67,6 @@
                         @endif
                     </div>
 
-                    <!-- CV Download Button -->
                     <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
                         <span class="text-[11px] text-slate-400">
                             Joined: {{ $candidate->created_at->format('M d, Y') }}
@@ -79,7 +74,7 @@
 
                         @if($candidate->resume)
                             <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3.5 py-2 rounded-xl font-semibold transition-colors flex items-center gap-1.5">
-                                <span>📄 View / Download CV</span>
+                                <span>View CV</span>
                             </a>
                         @else
                             <span class="text-[11px] text-slate-500 italic">No CV uploaded</span>

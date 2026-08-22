@@ -16,14 +16,12 @@
         @csrf
         @method('PUT')
 
-        <!-- Job Title -->
         <div>
             <label class="block text-xs text-slate-400 mb-1">Job Title</label>
             <input type="text" name="title" value="{{ old('title', $job->title) }}" class="w-full bg-slate-900 border border-slate-800 text-xs p-2.5 rounded-lg text-white focus:outline-none focus:border-indigo-500" required>
             @error('title') <p class="text-rose-400 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Category & Work Type -->
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label class="block text-xs text-slate-400 mb-1">Category</label>
@@ -41,7 +39,6 @@
             </div>
         </div>
 
-        <!-- Location & Salary -->
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label class="block text-xs text-slate-400 mb-1">Location</label>
@@ -55,28 +52,24 @@
             </div>
         </div>
 
-        <!-- Required Skills -->
         <div>
             <label class="block text-xs text-slate-400 mb-1">Required Skills</label>
             <input type="text" name="required_skills" value="{{ old('required_skills', $job->required_skills) }}" placeholder="PHP, Laravel, MySQL" class="w-full bg-slate-900 border border-slate-800 text-xs p-2.5 rounded-lg text-white focus:outline-none focus:border-indigo-500" required>
             @error('required_skills') <p class="text-rose-400 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Application Deadline -->
         <div>
             <label class="block text-xs text-slate-400 mb-1">Application Deadline</label>
             <input type="date" name="deadline" value="{{ old('deadline', \Carbon\Carbon::parse($job->deadline)->format('Y-m-d')) }}" class="w-full bg-slate-900 border border-slate-800 text-xs p-2.5 rounded-lg text-white focus:outline-none focus:border-indigo-500" required>
             @error('deadline') <p class="text-rose-400 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Job Description -->
         <div>
             <label class="block text-xs text-slate-400 mb-1">Job Description</label>
             <textarea name="description" rows="4" class="w-full bg-slate-900 border border-slate-800 text-xs p-2.5 rounded-lg text-white focus:outline-none focus:border-indigo-500" required>{{ old('description', $job->description) }}</textarea>
             @error('description') <p class="text-rose-400 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Action Buttons -->
         <div class="flex items-center gap-3 pt-2">
             <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-6 py-2.5 rounded-lg transition-colors">
                 Update Job Listing

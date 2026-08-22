@@ -45,34 +45,28 @@
         @yield('content')
     </main>
 
-    <!-- Floating AI Chatbot Widget -->
-    <!-- Floating Toggle Button (Visible when chat is closed) -->
 <button 
     id="chatbot-toggle-btn" 
     onclick="toggleChatbot()" 
     class="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white p-4 rounded-full shadow-2xl z-50 flex items-center justify-center transition-transform transform hover:scale-110 focus:outline-none"
     title="Open AI Assistant"
 >
-    <!-- Robot / Chat Icon -->
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
     </svg>
 </button>
 
-<!-- Floating Chatbot Drawer (Hidden by default) -->
 <div 
     id="chatbot-container" 
     class="hidden fixed bottom-6 right-6 w-80 sm:w-96 bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col transition-all duration-300"
     style="height: 480px;"
 >
-    <!-- Chat Header -->
     <div class="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <h3 class="font-bold text-xs text-white">AI Assistant</h3>
         </div>
         
-        <!-- X Close Button -->
         <button 
             onclick="toggleChatbot()" 
             class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors focus:outline-none"
@@ -84,14 +78,12 @@
         </button>
     </div>
 
-    <!-- Chat Messages Log -->
     <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs text-slate-300">
         <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 max-w-[85%] text-slate-300">
             Hello! I am your AI assistant. How can I help you today?
         </div>
     </div>
 
-    <!-- Input Form -->
     <form id="chat-form" onsubmit="sendChatMessage(event)" class="p-3 border-t border-slate-800 bg-slate-950 flex gap-2">
         @csrf
         <input 
@@ -110,7 +102,6 @@
     </form>
 </div>
 
-<!-- JavaScript Toggle & AJAX Messaging Logic -->
 <script>
     function toggleChatbot() {
         const container = document.getElementById('chatbot-container');
@@ -133,7 +124,6 @@
 
         const messagesContainer = document.getElementById('chat-messages');
 
-        // Append User Message
         const userDiv = document.createElement('div');
         userDiv.className = 'bg-indigo-600 text-white p-3 rounded-xl ml-auto max-w-[85%] text-xs';
         userDiv.textContent = message;
@@ -154,7 +144,6 @@
 
             const data = await response.json();
 
-            // Append Bot Response
             const botDiv = document.createElement('div');
             botDiv.className = 'bg-slate-900 p-3 rounded-xl border border-slate-800 max-w-[85%] text-slate-300';
             botDiv.textContent = data.reply || "Sorry, I couldn't process that request.";

@@ -12,17 +12,33 @@ class ChatbotController extends Controller
     {
         $query = strtolower(trim($request->input('message', '')));
         
-        /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
         if (!$user) {
             return response()->json(['reply' => 'Please log in to talk to the AI Assistant.']);
         }
 
+        
+        if (str_contains($query, 'jobs in ')) {
+            $parts = explode('jobs in ', $query);
+            $category = trim(end($parts));
+
+            if (!empty($category)) {
+                $jobs = Job::where('category', 'like', '%' . $category . '%')
+                    ->orWhere('title', 'like', '%' . $category . '%')
+                    ->pluck('title')
+                    ->implode(', ');
+
+                return response()->json([
+                    'reply' => "Jobs in " . ucfirst($category) . ": " . ($jobs ?: 'None found.')
+                ]);
+            }
+        }
+
         $isCandidate = method_exists($user, 'isCandidate') ? $user->isCandidate() : ($user->role === 'candidate');
         $isAdmin = method_exists($user, 'isAdmin') ? $user->isAdmin() : ($user->role === 'admin');
 
-        // CANDIDATE BOT INTENTS
+        
         if ($isCandidate) {
             if (str_contains($query, 'best jobs') || str_contains($query, 'match my skills')) {
                 $skills = array_filter(array_map('trim', explode(',', strtolower($user->skills ?? ''))));
@@ -52,7 +68,6 @@ class ChatbotController extends Controller
             }
         }
 
-        // ADMIN BOT INTENTS
         if ($isAdmin) {
             if (str_contains($query, 'how many candidates') || str_contains($query, 'registered')) {
                 $count = User::where('role', 'candidate')->count();
@@ -71,16 +86,8 @@ class ChatbotController extends Controller
                 $jobs = Job::where('deadline', '>=', now()->toDateString())->pluck('title')->implode(', ');
                 return response()->json(['reply' => "Available Jobs: " . ($jobs ?: 'No active listings.')]);
             }
-
-            if (str_contains($query, 'programming')) {
-                $jobs = Job::where('category', 'like', '%programming%')
-                    ->orWhere('title', 'like', '%developer%')
-                    ->orWhere('title', 'like', '%programmer%')
-                    ->pluck('title')->implode(', ');
-                return response()->json(['reply' => "Jobs in Programming: " . ($jobs ?: 'None found.')]);
-            }
         }
 
-        return response()->json(['reply' => "I am your AI Assistant. Try asking about matching jobs, candidate stats, or required skills!"]);
+        return response()->json(['reply' => "I am your AI Assistant. Try asking about 'jobs in marketing', 'jobs in design', matching jobs, or candidate stats!"]);
     }
 }

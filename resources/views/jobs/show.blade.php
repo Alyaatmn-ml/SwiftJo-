@@ -3,7 +3,6 @@
 @section('content')
 <div class="max-w-3xl mx-auto bg-slate-950 border border-slate-800 p-8 rounded-2xl shadow-xl mt-6">
     
-    <!-- Top Action Nav -->
     <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
         <a href="{{ route('jobs.index') }}" class="text-xs text-slate-400 hover:text-white transition-colors">
             ← Back to Job Listings
@@ -25,7 +24,6 @@
         @endif
     </div>
 
-    <!-- Job Title & Basic Info -->
     <div class="space-y-2 mb-6">
         <h1 class="text-2xl font-bold text-white">{{ $job->title }}</h1>
         <div class="text-xs text-slate-400 space-y-1">
@@ -34,7 +32,6 @@
         </div>
     </div>
 
-    <!-- Job Details List -->
     <div class="space-y-4 p-5 bg-slate-900/60 border border-slate-800 rounded-xl mb-6 text-xs">
         <div class="pb-3 border-b border-slate-800/80">
             <span class="text-slate-500 block text-[11px] font-semibold uppercase tracking-wider mb-1">Category</span>
@@ -57,7 +54,6 @@
         </div>
     </div>
 
-    <!-- Description -->
     <div class="space-y-2 mb-8">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Job Description</h3>
         <div class="text-xs text-slate-300 bg-slate-900/40 p-5 rounded-xl border border-slate-800/80 leading-relaxed whitespace-pre-line font-normal">
@@ -65,7 +61,6 @@
         </div>
     </div>
 
-    <!-- Application Button Handler -->
     <div class="pt-4 border-t border-slate-800">
         @if(auth()->check() && method_exists(auth()->user(), 'isCandidate') && auth()->user()->isCandidate())
             @php
